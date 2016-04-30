@@ -19,11 +19,15 @@ public:
 	void setStart();
 	double getStop();
 	void setStop();
+	int getAmountOfData();
+	void setAmountOfData(int AmountOfData);
+	void displayRunTime();
 
 private:
 	timeval time;
 	double RunTime_;		//czas wykonania algorytmu
 	double start_, stop_;
+	int amountOfData_;
 };
 
 #endif /* STOPWATCH_H_ */

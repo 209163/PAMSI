@@ -8,12 +8,13 @@
 #ifndef LISTATEST_H_
 #define LISTATEST_H_
 #include <iostream>
-#include "Lista.h"
+
+#include "ArrayList.h"
 #include "IRunnable.h"
 
 
 
-class ListaTest : public Lista, public IRunnable
+class ListaTest : public ArrayList, public IRunnable
 {
 public:
 	ListaTest();

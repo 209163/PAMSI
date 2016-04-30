@@ -15,6 +15,7 @@ using namespace std;
  * konstruktor
  */
 Stopwatch::Stopwatch() {
+	amountOfData_=0;
 	start_=0;
 	stop_=0;
 	RunTime_=0;
@@ -83,4 +84,20 @@ void Stopwatch::setStop()
 {
 	gettimeofday(&time, NULL);
 	stop_=time.tv_sec+(time.tv_usec/1000000.0);
+}
+
+
+int Stopwatch::getAmountOfData()
+{
+	return amountOfData_;
+}
+
+void Stopwatch::setAmountOfData(int AmountOfData)
+{
+	amountOfData_=AmountOfData;
+}
+
+void Stopwatch::displayRunTime()
+{
+	printf("%.8f sek\n", getRunTime());
 }

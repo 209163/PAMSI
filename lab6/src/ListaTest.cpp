@@ -9,8 +9,9 @@
 #include <cstdio>
 #include <ctime>
 #include "ListaTest.h"
+
+#include "ArrayList.h"
 #include "Dictionary.h"
-#include "Lista.h"
 
 using namespace std;
 
@@ -32,7 +33,7 @@ void ListaTest::run(int AmountOfComp)					//liczba skladnikow do dodania
 //**********************************************************************
 	Dictionary dict;
 	dict.setWords();									//wczytuje slownik do tablicy
-	Lista list;
+	ArrayList list;
 
 	for (int i=0; i<AmountOfComp;i++)					//lista randomowych wyrazow
 	{
