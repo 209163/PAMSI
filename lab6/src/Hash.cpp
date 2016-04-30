@@ -127,7 +127,7 @@ void Hash::printItemsInIndex(int index)
 	}
 }
 
-void Hash::find(string name)
+int Hash::find(string name)
 {
 	int index = hash(name);
 	bool foundName=false;
@@ -147,11 +147,12 @@ void Hash::find(string name)
 	if (foundName==true)
 	{
 		cout<< name<<"'s slot index is "<<index<<" and an telephone number is "<<telephone<<endl;
+		return telephone;
 	}
 	else
 	{
 		cout<<name<<" was not found in the Hash Table\n";
-
+		return 0;
 	}
 
 }
@@ -159,4 +160,9 @@ void Hash::find(string name)
 int Hash::getTableSize()
 {
 	return tableSize_;
+}
+
+int Hash::operator [ ] (string name)
+{
+	return find(name);
 }

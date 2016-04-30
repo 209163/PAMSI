@@ -35,8 +35,10 @@ public:
 	///wyswietla wszystkie itemy z bucketu o danym numerze indexu
 	void printItemsInIndex(int index);
 	///wyszukuje slowo i zwraca nr indexu pod ktorym sie znajduje
-	void find(string name);
+	int find(string name);
 	int getTableSize();
+	///przeciazenie operatora []
+	int operator [ ] (string key);
 };
 
 #endif /* HASH_H_ */
