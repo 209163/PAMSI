@@ -6,14 +6,15 @@
  */
 
 #include <iostream>
-#include "Graph.h"
-//using namespace std;
+#include "GraphTest.h"
+#include "test.h"
+using namespace std;
 
 int main()
 {
 
-	Graph graf;
-	graf.test();
+	GraphTest<int> t1;
+	t1.run();
 
 	return 0;
 }
