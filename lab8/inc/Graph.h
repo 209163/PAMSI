@@ -10,6 +10,7 @@
 #define LIST_SIZE 3
 #include "LinkedList.h"
 #include "ArrayList.h"
+<<<<<<< HEAD
 #include <string>
 #define VERTICES_AMOUNT 10  //rozmiar tablicy z wierzcholkami
 
@@ -26,14 +27,32 @@ private:
 		};
 	vertex<type> *vertices_;
 	int count_;
+=======
+
+template <class type>
+class Graph : public LinkedList<type>, public ArrayList<type>{
+private:
+	ArrayList<type> vertices_;
+>>>>>>> 62f8fde262ca6a7b5cb33a6f36ed5fcc6dbe86ca
 
 public:
 	Graph();
 	virtual ~Graph();
+<<<<<<< HEAD
 
 	bool isVerticesEmpty();
 	void addVertex(int position);
 	void addEdge(int index1 , int index2, int w);
+=======
+	template <class type2>
+	struct vertex{
+		type data;
+		LinkedList<type> connections;
+	};
+
+	void addVertex(int position);
+	void addEdge(vertex<type> v , int index, int w);
+>>>>>>> 62f8fde262ca6a7b5cb33a6f36ed5fcc6dbe86ca
 	int getNeighbours(vertex<type> v);
 	bool hasEdge(vertex<type> x, int vertexIndex);
 
@@ -47,6 +66,7 @@ using namespace std;
 template <class type>
 Graph<type>::Graph() {
 
+<<<<<<< HEAD
 	vertices_=new vertex<type>[VERTICES_AMOUNT];
 	for(int i=0; i<VERTICES_AMOUNT;i++)
 		{
@@ -55,11 +75,17 @@ Graph<type>::Graph() {
 			vertices_[i].index=0;
 		}
 	count_=0;
+=======
+>>>>>>> 62f8fde262ca6a7b5cb33a6f36ed5fcc6dbe86ca
 }
 
 template <class type>
 Graph<type>::~Graph() {
+<<<<<<< HEAD
 	delete [] vertices_;
+=======
+
+>>>>>>> 62f8fde262ca6a7b5cb33a6f36ed5fcc6dbe86ca
 }
 
 /**
@@ -69,6 +95,7 @@ Graph<type>::~Graph() {
  * @param w - waga krawedzi
  */
 template <class type>
+<<<<<<< HEAD
 void Graph<type>::addEdge(int index1, int index2, int w)
 {
 	w=1;
@@ -95,6 +122,20 @@ void Graph<type>::addVertex(int index)
 	//wstawiam go do tablicy
 	vertices_[index]=v;
 	count_++;
+=======
+void Graph<type>::addEdge(vertex<type> v , int index, int w)
+{
+	w=1;
+
+	v.connections.addLast(index);
+}
+
+template <class type>
+void Graph<type>::addVertex(int position)
+{
+	vertex<type> v;
+	vertices_.add(v.connections, position);
+>>>>>>> 62f8fde262ca6a7b5cb33a6f36ed5fcc6dbe86ca
 }
 
 //czy jest polaczenie miedzy wierzcholkiem v i wierzcholkiem o zadanym nrze indexu
