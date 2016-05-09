@@ -10,23 +10,30 @@
 #define LIST_SIZE 3
 #include "LinkedList.h"
 #include "ArrayList.h"
+#include <string>
+#define VERTICES_AMOUNT 10  //rozmiar tablicy z wierzcholkami
 
 template <class type>
-class Graph : public LinkedList<type>, public ArrayList<type>{
+class Graph : public LinkedList<type>{
 private:
-	ArrayList<type> vertices_;
+	//ArrayList<type> vertices_;
+	template <class type2>
+	struct vertex{
+			int index;
+			string name;
+			int next;
+			LinkedList<type> connections;
+		};
+	vertex<type> *vertices_;
+	int count_;
 
 public:
 	Graph();
 	virtual ~Graph();
-	template <class type2>
-	struct vertex{
-		type data;
-		LinkedList<type> connections;
-	};
 
+	bool isVerticesEmpty();
 	void addVertex(int position);
-	void addEdge(vertex<type> v , int index, int w);
+	void addEdge(int index1 , int index2, int w);
 	int getNeighbours(vertex<type> v);
 	bool hasEdge(vertex<type> x, int vertexIndex);
 
@@ -40,11 +47,19 @@ using namespace std;
 template <class type>
 Graph<type>::Graph() {
 
+	vertices_=new vertex<type>[VERTICES_AMOUNT];
+	for(int i=0; i<VERTICES_AMOUNT;i++)
+		{
+			vertices_[i].name="empty";
+			vertices_[i].next=0;
+			vertices_[i].index=0;
+		}
+	count_=0;
 }
 
 template <class type>
 Graph<type>::~Graph() {
-
+	delete [] vertices_;
 }
 
 /**
@@ -54,18 +69,32 @@ Graph<type>::~Graph() {
  * @param w - waga krawedzi
  */
 template <class type>
-void Graph<type>::addEdge(vertex<type> v , int index, int w)
+void Graph<type>::addEdge(int index1, int index2, int w)
 {
 	w=1;
 
-	v.connections.addLast(index);
+
+}
+
+
+template <class type>
+bool Graph<type>::isVerticesEmpty()
+{
+	if(count_==0) return 1;
+	else return 0;
 }
 
 template <class type>
-void Graph<type>::addVertex(int position)
+void Graph<type>::addVertex(int index)
 {
+	//tworze nowy wierzcholek
 	vertex<type> v;
-	vertices_.add(v.connections, position);
+	v.index=index;
+	v.name="taken";
+	v.next=0;
+	//wstawiam go do tablicy
+	vertices_[index]=v;
+	count_++;
 }
 
 //czy jest polaczenie miedzy wierzcholkiem v i wierzcholkiem o zadanym nrze indexu
