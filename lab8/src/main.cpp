@@ -13,7 +13,7 @@ using namespace std;
 int main()
 {
 
-	GraphTest<int> t1;
+	GraphTest<int> t1(10);
 	t1.run();
 
 	return 0;

@@ -13,33 +13,36 @@ a 'next[element]' indeksem nastepnego obiektu na liscie, o ile nastepny istnieje
 #include "Stopwatch.h"
 #include "Queue.h"
 #include "LinkedList.h"
+#include <cstdlib>
+#include <ctime>
+#define SIZE 2
 using namespace std;
 
 template <class type>
-class ArrayList : public IArrayList,  public Stopwatch, public Kolejka, public LinkedList<type>
+class ArrayList : public IArrayList
 {
 public:
 	ArrayList();
 	virtual ~ArrayList();
-	virtual void add(LinkedList<type> item, int position);//dodaje element do listy (gdziekolwiek), item - dodawany element, position - indeks elementu listy, po ktorym ma byc wstawiony item
+	void add(type item, int position);//dodaje element do listy (gdziekolwiek), item - dodawany element, position - indeks elementu listy, po ktorym ma byc wstawiony item
 		//throw(EmptyListExeption);
-	LinkedList<type> getElem(int index);				//pobiera element ze wskazanego indeksu (bez usuwania)
+	type getElem(int index);				//pobiera element ze wskazanego indeksu (bez usuwania)
 		//throw(EmptyListExeption);
 	/*wyjatki*/
 	int getSize();      				//zwraca rozmiar tablicy
 	void display(int i);    			//wyswietla zawartosc i-tego elem listy
-	int findInArray(LinkedList<type> item);				//przeszukuje liste
+	int findInArray(type item);				//przeszukuje liste
 	int getNext(int index);
-	LinkedList<type> getName(int index);
+	type getName(int index);
 	bool isEmpty();						//zwraca 1 gdy lista jest pusta
 	void remove(int index);				//usuwa element o danym indeksie
 	int getCount();
 	void displayFree();
 
 private:
-	LinkedList<type> *name_;     		//wskaznik do tablicy dynamicznej z zapamietanymi obiektami
+	type *name_;     		//wskaznik do tablicy dynamicznej z zapamietanymi obiektami
     int *next_;				//wskaznik do tab dyn (kolejki) z indeksami nastepnych elementow
-    Kolejka free_;			//obiekt typu kolejka wolnych lokalizacji
+    Queue<type> free_;			//obiekt typu kolejka wolnych lokalizacji
     int size_;      		//aktualny rozmiar tablicy
     int count_;    			//liczba danych przechowywanych w tablicy
     type end_;
@@ -51,10 +54,7 @@ private:
 
 //***************************************************************************************************//
 
-#include <cstdlib>
-#include <ctime>
-#include <iostream>
-#define SIZE 2
+
 
 using namespace std;
 
@@ -74,7 +74,7 @@ ArrayList<type>::ArrayList() {
 	size_=SIZE;				//poczatkowy rozmiar tablicy
 	count_=0;				//liczba dodanych elementow
 	end_=0;
-	name_ = new LinkedList<type>[size_];
+	name_ = new type[size_];
 	next_=new int[size_];
 	//name_[0]=NULL;			//pierwszy element
 	next_[0]=1;
@@ -111,7 +111,7 @@ template <class type>
     if(size_==(count_+1) )
     {
         size_=size_*2;
-        LinkedList<type> *tmp1= new LinkedList<type>[size_];
+        type *tmp1= new type[size_];
         int *tmp2= new int[size_];
         for(int i=0; i<=count_;i++)
         {
@@ -133,7 +133,7 @@ template <class type>
  * @param position - indeks elementu, po ktorym ma zostac dodany item
  */
 template <class type>
- void ArrayList<type>::add(LinkedList<type> item, int position)				///position - indeks elementu po ktorym mamy wstawic
+ void ArrayList<type>::add(type item, int position)				///position - indeks elementu po ktorym mamy wstawic
  {
 	 enlarge_x2();
 //	 if(position==count_)
@@ -206,7 +206,7 @@ template <class type>
  * @return - zwraca nr indeksu szukanego slowa lub -1, jezeli nie znaleziono
  */
 template <class type>
- int ArrayList<type>::findInArray(LinkedList<type> item)
+ int ArrayList<type>::findInArray(type item)
  {
 	 	 for (int i=0; i<count_; i++)
 	 	 {
@@ -245,6 +245,12 @@ template <class type>
  int ArrayList<type>::getCount()
  {
 	 return count_;
+ }
+
+template <class type>
+ type ArrayList<type>::getElem(int index)
+ {
+	 return name_[next_[index]];
  }
 
 #endif /* LISTA_H_ */
